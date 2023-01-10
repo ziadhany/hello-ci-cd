@@ -25,7 +25,7 @@ jobs:
       - checkout
       - run:
           name: "print hello"
-          command: "echo print Hello, World!"
+          command: echo << pipeline.project.git_url >>
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
