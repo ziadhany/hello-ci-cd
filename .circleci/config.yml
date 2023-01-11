@@ -10,24 +10,22 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - echo-output
       - run:
           name: "print hello"
-          command: echo << pipeline.project.git_url >> > workspace/echo-output/output.txt
+          command: echo << pipeline.project.git_url >> > ~/output.txt
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - output.txt
 
   print_output_file:
     docker:
       - image: cimg/base:stable
     steps:
       - checkout
-      - persist_to_workspace:
-          root: /tmp/workspace
-          paths:
-            - "echo-output"
-      - run: cat /tmp/workspace/echo-output/output.txt
+      - attach_workspace:
+          at: ~/
+      - run: cat ~/output.txt
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
