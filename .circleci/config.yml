@@ -16,7 +16,7 @@ jobs:
       - checkout
       - run:
           name: "Say hello"
-          command: echo ${CIRCLE_BRANCH}
+          command: echo ${HHHH}
 
   print_hello:
     docker:
